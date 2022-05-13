@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/hero-images.png') }}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1 class="fw-normal pb-2">Gluten free &amp; you</h1>
+            <a class="btn btn-primary" href="">Find out more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-preview">

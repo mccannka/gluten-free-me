@@ -170,10 +170,9 @@ img::-moz-selection {
 }
 
 header.masthead {
-  margin-bottom: 50px;
   background: no-repeat center center;
   background-color: #868e96;
-  background-attachment: scroll;
+  background-attachment: fixed;
   position: relative;
   background-size: cover;
 }
@@ -383,6 +382,11 @@ footer .copyright {
   text-align: center;
 }
 
+a.btn.btn-primary {
+  background-color: #443742;
+  border-color: #443742;
+}
+
 .btn {
   font-size: 14px;
   font-weight: 800;
@@ -394,14 +398,14 @@ footer .copyright {
 }
 
 .btn-primary {
-  background-color: #0085A1;
-  border-color: #0085A1;
+  background-color: #443742;
+  border-color: #443742;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  color: #fff;
-  background-color: #00657b !important;
-  border-color: #00657b !important;
+  color: #f6f5f8;
+  background-color: #443742 !important;
+  border-color: #443742  !important;
 }
 
 .btn-lg {
