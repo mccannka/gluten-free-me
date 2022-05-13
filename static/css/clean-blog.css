@@ -89,8 +89,8 @@ img::-moz-selection {
 
 #mainNav {
   position: absolute;
-  border-bottom: 1px solid #e9ecef;
-  background-color: white;
+  border-bottom: 1px solid #443742;
+  background-color: #443742;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -407,4 +407,10 @@ footer .copyright {
 .btn-lg {
   font-size: 16px;
   padding: 25px 35px;
+}
+
+#hero-section {
+  background-image: linear-gradient;
+  background-size: cover;
+  min-height: 25em;
 }
