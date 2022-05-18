@@ -29,13 +29,13 @@
             <a class="nav-link" href="{{ (url_for('about')) }}">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="post.html">Recipes</a>
+            <a class="nav-link" href="{{ (url_for('recipes')) }}">Recipes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="user/register.html">Register</a>
+            <a class="nav-link" href="{{ (url_for('register')) }}">Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="user/login.html">Login</a>
+            <a class="nav-link" href="{{ (url_for('login')) }}">Login</a>
           </li>
         </ul>
       </div>
