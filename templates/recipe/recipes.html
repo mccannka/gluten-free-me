@@ -5,16 +5,28 @@
 <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/about-hero.png') }}')">
     <div class="overlay"></div>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1 class="fw-normal pb-2">Gluten free recipes</h1>
-            <p>Taking the hassle out of cooking</p>
-          </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1 class="fw-normal pb-2">Gluten free recipes</h1>
+                    <p>Taking the hassle out of cooking</p>
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-10 mx-auto">
+                                <input type="email" class="form-control" id="inputEmail3" />
+                            </div>
+                            <div class="col-lg-8 col-md-10 mx-auto">
+                                <button type="submit" class="btn btn-primary">Search Recipes</button>
+                                <button type="submit" class="btn btn-primary">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </header>
+</header>
+
 
 <!-- Search recipe functionality -->
 
