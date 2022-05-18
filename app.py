@@ -30,6 +30,19 @@ def login():
     return render_template("user/login.html")
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+    return render_template("recipes/recipes.html", recipes=recipes)
+
+
+@app.route("/recipes")
+def get_recipes():
+    recipes = list(mongo.db.recipes.find().sort("_id", -1))
+    return render_template("recipes/recipes.html", recipes=recipes)
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
