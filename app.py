@@ -30,6 +30,12 @@ def login():
     return render_template("user/login.html")
 
 
+@app.route("/recipes")
+def get_recipes():
+    recipes = list(mongo.db.recipes.find().sort("_id", -1))
+    return render_template("recipes/recipes.html", recipes=recipes)
+
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
@@ -37,10 +43,10 @@ def search():
     return render_template("recipes/recipes.html", recipes=recipes)
 
 
-@app.route("/recipes")
-def get_recipes():
-    recipes = list(mongo.db.recipes.find().sort("_id", -1))
-    return render_template("recipes/recipes.html", recipes=recipes)
+@app.route("/recipe/<recipe_id>")
+def single_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("recipes/single_recipe.html", recipe=recipe)
 
 
 if __name__ == "__main__":
