@@ -47,8 +47,43 @@ def login():
 
         flash("Oops, this Username and/or Password is incorrect")
         return redirect(url_for("login"))
-        
+
     return render_template("user/login.html")
+
+
+# Community member - Password validation
+def existing_user():
+    return mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+
+# Registration for community member 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        if existing_user():
+            flash("Oops, this username is not available!")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+
+        session["user"] = request.form.get("username").lower()
+        flash("Yay, you've successfully been registered with our Gluten Free & Me community")
+        return redirect(url_for("personal", username=session["user"]))
+
+    return render_template("user/register.html")
+
+
+
+
+def password_is_valid(existing_user):
+    return check_password_hash(
+        existing_user["password"], request.form.get("password"))
+
 
 # Define homepage / index option 
 @app.route("/")
@@ -73,14 +108,13 @@ def recipes():
 @app.route("/recipe/<recipe_id>")
 def specific_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("recipes/single_recipe.html", recipe=recipe)
+    return render_template("recipes/specific.html", recipe=recipe)
 
 
 # Define homepage / register option 
 @app.route("/register")
 def register():
     return render_template("user/register.html")
-
 
 
 # Recipe search functionality
@@ -91,11 +125,128 @@ def search():
     return render_template("recipes/recipes.html", recipes=recipes)
 
 
-@app.route("/recipe/<recipe_id>")
-def single_recipe(recipe_id):
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("recipes/single_recipe.html", recipe=recipe)
+# ---------- Personalised recipe page -----------
+@app.route("/user/<username>", methods=["GET", "POST"])
+@login_required
+def personal(username):
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
 
+    if session.get("user"):
+        recipes = list(mongo.db.recipes.find().sort("_id", -1))
+        return render_template(
+            "user/personal.html", username=username, recipes=recipes)
+
+    return redirect(url_for("login"))
+
+
+# Log out 
+@app.route("/logout")
+@login_required
+def logout():
+    flash("You have been successfully logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
+# Functionality to display recipes 
+def display_recipes(request):
+        return {
+            "recipe_name": request.form.get("recipe_name"),
+            "recipe_overview": request.form.get("recipe_overview"),
+            "recipe_preparation_time": request.form.get(
+                "recipe_preparation_time"),
+            "recipe_servings": request.form.get("recipe_servings"),
+            "recipe_ingredients": request.form.getlist("recipe_ingredients"),
+            "recipe_instruction": request.form.getlist("recipe_instruction"),
+            "recipe_image_1": request.form.get("recipe_image_1"),
+            "recipe_image_2": request.form.get("recipe_image_2"),
+            "recipe_image_3": request.form.get("recipe_image_3"),
+            "recipe_image_4": request.form.get("recipe_image_4"),
+            "recipe_created_by": session["user"]
+        }
+
+
+# Add recipe
+@app.route("/recipe/add", methods=["GET", "POST"])
+@login_required
+def add_recipe():
+    if request.method == "POST":
+        recipe = display_recipes(request)
+        mongo.db.recipes.insert_one(recipe)
+        flash("You've successfully shared yourr recipe")
+        return redirect(url_for("personal", username=session["user"]))
+    return render_template("recipes/add.html")     
+
+
+# Edit recipe
+@app.route("/recipe/update/<recipe_id>", methods=["GET", "POST"])
+@login_required
+def edit_recipe(recipe_id):
+    if "user" in session:
+
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+        if session["user"] == 'admin':
+
+            if request.method == "POST":
+                save = display_recipes(request)
+                mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, save)
+                flash("Your recipe has been updated successfully")
+                return redirect(url_for("personal", username=session["user"]))
+            recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+            return render_template(
+                    "recipes/edit.html", recipe=recipe)
+
+        elif session["user"].lower() == recipe["recipe_created_by"].lower():
+
+            if request.method == "POST":
+                save = display_recipes(request)
+                mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, save)
+                flash("Your recipe has been updated successfully")
+                return redirect(url_for("personal", username=session["user"]))
+            recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+            return render_template(
+                    "recipes/edit.html", recipe=recipe)
+
+        flash("Oops, you can't edit other user's recipes.")
+        return redirect(url_for("index"))
+
+    flash("Oops, you can't edit other user's recipes.")
+    return redirect(url_for("index"))
+
+
+# Delete recipe
+@app.route("/recipe/delete/<recipe_id>")
+@login_required
+def delete_recipe(recipe_id):
+    if "user" in session:
+
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+        if session["user"] == 'admin':
+            mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+            flash("Your recipe has been deleted successfully")
+            return redirect(url_for("recipes"))
+
+        elif session["user"].lower() == recipe["recipe_created_by"].lower():
+            mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+            flash("Your recipe has been deleted successfully")
+            return redirect(url_for("recipes"))
+
+    flash("Oops, you can't edit other user's recipes.")
+    return redirect(url_for("index"))
+
+
+# Error states
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template('errors/500.html'), 500
 
 if __name__ == "__main__":
     app.run(
