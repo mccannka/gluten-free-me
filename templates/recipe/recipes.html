@@ -10,14 +10,14 @@
                 <div class="site-heading">
                     <h1 class="fw-normal pb-2">Gluten free recipes</h1>
                     <p>Taking the hassle out of cooking</p>
-                    <form>
+                    <form method="POST" action="{{ url_for('search') }}">
                         <div class="row">
                             <div class="col-lg-8 col-md-10 mx-auto">
                                 <input type="text" name="query" id="query" minlength="5" class="validate" required>
                             </div>
                             <div class="col-lg-8 col-md-10 mx-auto">
                                 <button type="submit" class="btn btn-primary" method="POST" action="{{ url_for('search') }}">Search Recipes</button>
-                                <button type="submit" class="btn btn-primary" href="{{ url_for('get_recipes') }}">Reset</button>
+                                <button type="submit" class="btn btn-primary" href="{{ url_for('recipes') }}">Reset</button>
                             </div>
                         </div>
                     </form>
