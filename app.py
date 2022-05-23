@@ -21,9 +21,12 @@ mongo = PyMongo(app)
 
 # Login required
 # Requires login for enhanced functionality 
+from functools import wraps
+from flask import request
+
 def login_required(f):
     @wraps(f)
-    def wrap(*args, **kwargs):
+    def wraps(*args, **kwargs):
         if "user" in session:
             return f(*args, **kwargs)
         else:
