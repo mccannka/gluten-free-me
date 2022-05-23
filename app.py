@@ -22,17 +22,16 @@ mongo = PyMongo(app)
 # Login required
 # Requires login for enhanced functionality 
 from functools import wraps
-from flask import request
 
 def login_required(f):
     @wraps(f)
-    def wraps(*args, **kwargs):
+    def login(*args, **kwargs):
         if "user" in session:
             return f(*args, **kwargs)
         else:
             flash("You must be logged to proceed!")
             return redirect(url_for("login"))
-    return wrap
+    return login
 
 
 # Define homepage / login option 
@@ -102,8 +101,7 @@ def about():
 
 #  Define homepage / recipes option 
 @app.route("/recipes")
-def add_recipes():
-    recipes = list(mongo.db.recipes.find().sort("id"), -1)
+def get_recipes():
     return render_template("recipe/recipes.html")
 
 
@@ -111,7 +109,7 @@ def add_recipes():
 @app.route("/recipe/<recipe_id>")
 def specific_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("recipes/specific.html", recipe=recipe)
+    return render_template("recipe/specific_recipes.html", recipe=recipe)
 
 
 # Recipe search functionality
@@ -119,7 +117,7 @@ def specific_recipe(recipe_id):
 def search():
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
-    return render_template("recipes/recipes.html", recipes=recipes)
+    return render_template("recipe/recipes.html", recipes=recipes)
 
 
 # Personalised recipe page
@@ -171,7 +169,7 @@ def add_recipe():
         mongo.db.recipes.insert_one(recipe)
         flash("You've successfully shared yourr recipe")
         return redirect(url_for("personal", username=session["user"]))
-    return render_template("recipes/add_recipes.html")     
+    return render_template("recipe/add_recipes.html")     
 
 
 # Edit recipe
@@ -191,7 +189,7 @@ def edit_recipe(recipe_id):
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
-                    "recipes/edit_recipes.html", recipe=recipe)
+                    "recipe/edit_recipes.html", recipe=recipe)
 
         elif session["user"].lower() == recipe["recipe_created_by"].lower():
 
@@ -202,7 +200,7 @@ def edit_recipe(recipe_id):
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
-                    "recipes/edit_recipes.html", recipe=recipe)
+                    "recipe/edit_recipes.html", recipe=recipe)
 
         flash("Oops, you can't edit other user's recipes.")
         return redirect(url_for("index"))

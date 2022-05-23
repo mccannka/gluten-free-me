@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
 <!-- hero-->
 <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/about-hero.png') }}')">
     <div class="overlay"></div>
@@ -17,7 +16,7 @@
                             </div>
                             <div class="col-lg-8 col-md-10 mx-auto">
                                 <button type="submit" class="btn btn-primary" method="POST" action="{{ url_for('search') }}">Search Recipes</button>
-                                <button type="submit" class="btn btn-primary" href="{{ url_for('recipes') }}">Reset</button>
+                                <button type="submit" class="btn btn-primary" href="{{ url_for('get_recipes') }}">Reset</button>
                             </div>
                         </div>
                     </form>
@@ -90,7 +89,4 @@
             </div>
         </div>
     </div>
-    
-
-
 {% endblock %}
