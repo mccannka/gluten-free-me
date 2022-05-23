@@ -1,7 +1,6 @@
 # Imports & Config 
 import os
 from flask import Flask, render_template
-from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -14,13 +13,11 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
-mongo = PyMongo(app)
-
 
 # Login required
 # Requires login for enhanced functionality 
-def login_required(f):
-    @wraps(f)
+def login_required():
+    @wraps()
     def wrap(*args, **kwargs):
         if "user" in session:
             return f(*args, **kwargs)
@@ -78,8 +75,6 @@ def register():
     return render_template("user/register.html")
 
 
-
-
 def password_is_valid(existing_user):
     return check_password_hash(
         existing_user["password"], request.form.get("password"))
@@ -99,9 +94,9 @@ def about():
 
 #  Define homepage / recipes option 
 @app.route("/recipes")
-def recipes():
+def add_recipes():
     recipes = list(mongo.db.recipes.find().sort("id"), -1)
-    return render_template("recipe/recipes.html")
+    return render_template("recipe/add_recipes.html")
 
 
 # Standalone recipe page 
@@ -109,12 +104,6 @@ def recipes():
 def specific_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template("recipes/specific.html", recipe=recipe)
-
-
-# Define homepage / register option 
-@app.route("/register")
-def register():
-    return render_template("user/register.html")
 
 
 # Recipe search functionality
@@ -125,7 +114,7 @@ def search():
     return render_template("recipes/recipes.html", recipes=recipes)
 
 
-# ---------- Personalised recipe page -----------
+# Personalised recipe page
 @app.route("/user/<username>", methods=["GET", "POST"])
 @login_required
 def personal(username):
@@ -162,7 +151,6 @@ def display_recipes(request):
             "recipe_image_1": request.form.get("recipe_image_1"),
             "recipe_image_2": request.form.get("recipe_image_2"),
             "recipe_image_3": request.form.get("recipe_image_3"),
-            "recipe_image_4": request.form.get("recipe_image_4"),
             "recipe_created_by": session["user"]
         }
 
@@ -176,7 +164,7 @@ def add_recipe():
         mongo.db.recipes.insert_one(recipe)
         flash("You've successfully shared yourr recipe")
         return redirect(url_for("personal", username=session["user"]))
-    return render_template("recipes/add.html")     
+    return render_template("recipes/add_recipes.html")     
 
 
 # Edit recipe
@@ -196,7 +184,7 @@ def edit_recipe(recipe_id):
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
-                    "recipes/edit.html", recipe=recipe)
+                    "recipes/edit_recipes.html", recipe=recipe)
 
         elif session["user"].lower() == recipe["recipe_created_by"].lower():
 
@@ -207,7 +195,7 @@ def edit_recipe(recipe_id):
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
-                    "recipes/edit.html", recipe=recipe)
+                    "recipes/edit_recipes.html", recipe=recipe)
 
         flash("Oops, you can't edit other user's recipes.")
         return redirect(url_for("index"))
@@ -247,6 +235,7 @@ def page_not_found(error):
 @app.errorhandler(500)
 def server_error(error):
     return render_template('errors/500.html'), 500
+
 
 if __name__ == "__main__":
     app.run(
