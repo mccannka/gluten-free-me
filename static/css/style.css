@@ -35,3 +35,9 @@ a.btn.btn-primary {
     border-color: #cacaaa;
     color: #000000e6;
 }
+
+.btn.btn-primary {
+    background-color: #443742;
+    border-color: #443742;
+    color: #F6F5F8;
+}
