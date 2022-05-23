@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/hero-images.png') }}')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1 class="fw-normal pb-2">Gluten free &amp; you</h1>
-            <a class="btn btn-primary" href="">Find out more</a>
+<section id="hero-section">
+    <div class="container-fluid">
+       <div class="row text-center pt-5">
+          <div class="col-md-5 p-lg-5 mx-auto white-text" id="hero-content-col">
+             <h1 class="display-4 fw-normal pb-2">Gluten free &amp; you</h1>
+             <h4 class="pb-3">Everyday recipes to support changes in your lifestyle</h4>
+             <a class="btn btn-primary" href="">Find out more</a>
           </div>
-        </div>
-      </div>
+       </div>
     </div>
-  </header>
+ </section>
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-preview">
