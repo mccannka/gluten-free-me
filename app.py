@@ -1,23 +1,23 @@
 # Imports & Config 
 import os
+import pymongo
 from flask import Flask, render_template
 from bson.objectid import ObjectId
 from functools import wraps
-from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env  
 
 app = Flask(__name__)
 
-app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.secret_key = os.environ.get("SECRET_KEY")
+MONGO_URI = os.environ.get("MONGO_URI")
+DATABASE = "websiteRecipes"
+COLLECTION = "recipes"
 
 
 # Login required
 # Requires login for enhanced functionality 
-def login_required():
-    @wraps()
+def login_required(f):
+    @wraps(f)
     def wrap(*args, **kwargs):
         if "user" in session:
             return f(*args, **kwargs)
@@ -96,7 +96,7 @@ def about():
 @app.route("/recipes")
 def add_recipes():
     recipes = list(mongo.db.recipes.find().sort("id"), -1)
-    return render_template("recipe/add_recipes.html")
+    return render_template("recipe/recipes.html")
 
 
 # Standalone recipe page 
@@ -150,7 +150,6 @@ def display_recipes(request):
             "recipe_instruction": request.form.getlist("recipe_instruction"),
             "recipe_image_1": request.form.get("recipe_image_1"),
             "recipe_image_2": request.form.get("recipe_image_2"),
-            "recipe_image_3": request.form.get("recipe_image_3"),
             "recipe_created_by": session["user"]
         }
 
