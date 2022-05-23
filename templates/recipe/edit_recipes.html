@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <h5 class="center-align">Edit recipe</h5>
+        <p class="center-align">Wanting to update or correct your recipe?  You can do that here.</p>
+      </div>
+    </div>
+    <div class="row">
+      <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+        <div class="card-panel">
+          <!-- recipe name -->
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="fas fa-pen-alt prefix"></i>
+              <input id="recipe_name" name="recipe_name" type="text" data-length="50" minlength="5"
+                maxlength="50" value="{{ recipe.recipe_name }}" class="validate" required>
+              <label for="recipe_name">Recipe name</label>
+            </div>
+          </div>
+          <!-- Introduction -->
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="fas fa-book-open prefix"></i>
+              <textarea id="recipe_overview" name="recipe_overview" data-length="200" minlength="5"
+                maxlength="200" class="materialize-textarea validate" required>{{ recipe.recipe_overview }}</textarea>
+              <label for="recipe_overview">Introduction</label>
+            </div>
+          </div>
+          <!-- Preparation time -->
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="fas fa-hourglass-start prefix"></i>
+              <input id="recipe_preparation_time" name="recipe_preparation_time" type="number" min="1" max="180"
+                value="{{ recipe.recipe_preparation_time }}" class="validate" required>
+              <label for="recipe_preparation_time">Preparation time in minutes</label>
+            </div>
+          </div>
+          <!-- Servings -->
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="fas fa-users prefix"></i>
+              <input id="recipe_servings" name="recipe_servings" type="number" min="1" max="20"
+                value="{{ recipe.recipe_servings }}" class="validate" required>
+              <label for="recipe_servings">Servings</label>
+            </div>
+          </div>
+          <!-- Ingredients -->
+          {% for ingredient in recipe.recipe_ingredients %}
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="fas fa-cookie-bite prefix"></i>
+              <input id="recipe_ingredients" name="recipe_ingredients" type="text" data-length="150" minlength="2"
+                value="{{ ingredient }}" maxlength="150" class="validate" required>
+              <label for="recipe_ingredients{{ loop.index }}">Ingredient</label>
+              <a type="button" class="right btn-small btn-red-ingredient remove_ingredient">
+                <i class="fas fa-minus"></i> Remove ingredient</a>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="row list_of_ingredients">
+
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <a class="right btn-small btn-green-ingredient add_ingredient">
+                <i class="fas fa-plus"></i> 
+                Add ingredient
+              </a>
+            </div>
+          </div>
+          <!-- Instruction -->
+          {% for step in recipe.recipe_instruction %}
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="fas fa-utensil-spoon prefix"></i>
+              <input id="recipe_instruction" name="recipe_instruction" type="text" data-length="500" minlength="5"
+                value="{{ step }}" maxlength="500" class="validate" required>
+              <label for="recipe_instruction{{ loop.index }}">Instruction</label>
+              <a type="button" class="right btn-small btn-red-ingredient remove_instruction_step">
+                <i class="fas fa-minus"></i> Remove instruction step</a>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="row list_of_instruction_steps">
+
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <a class="right btn-small btn-green-ingredient add_instruction_step">
+                <i class="fas fa-plus"></i> 
+                Add instruction step
+              </a>
+            </div>
+          </div>
+          <!-- Images -->
+          <div class="row">
+            <h6 class="center-align">You can upload max 2 images</h6>
+            <div class="input-field col s12">
+              <i class="fas fa-image prefix"></i>
+              <input id="recipe_image_1" name="recipe_image_1" type="url" value="{{ recipe.recipe_image_1 }}"
+                class="validate" required>
+              <label for="recipe_image_1">Place your first image url here</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="fas fa-image prefix"></i>
+              <input id="recipe_image_2" name="recipe_image_2" type="url" value="{{ recipe.recipe_image_2 }}"
+                class="validate">
+              <label for="recipe_image_2">Place your 2nd image url here</label>
+            </div>
+          </div>
+          <!-- Edit recipe save button -->
+          <div class="row bottom-margins">
+            <div class="col s12 center-align">
+              <button type="submit" class=" btn-large btn-blue center-align">
+                Save edited recipe <i class="fas fa-check prefix"></i>
+              </button>
+            </div>
+            <div class="col s12 center-align">
+              <!-- Cancel button -->
+              <button data-target="{{ recipe._id }}" type="button"
+                class="modal-trigger btn-spacing btn-large btn-red center-align recipe-margins">
+                Cancel <i class="fas fa-times prefix"></i>
+              </button>
+              <!-- Edit Recipe Modal -->
+              <div id="{{ recipe._id }}" class="modal">
+                <div class="modal-content">
+                  <h4 class="card-header">Pay attention!</h4>
+                  <p class="center-align">
+                    You are about to cancel the changes you made in your recipe, this can not be undone!
+                    Are you sure you want to quit editing this recipe?
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-action modal-close btn-flat">
+                    <span class="text-keep">No, keep editing!</span>
+                  </a>
+                  <a href="{{ url_for('get_recipes') }}" data-target="{{ recipe._id }}"
+                    class="modal-action modal-close btn-flat">
+                    <span class="text-delete">Yes, cancel!</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
