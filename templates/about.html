@@ -1,32 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/about-hero.png') }}')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1 class="fw-normal pb-2">About us</h1>
-            <p>A community, making gluten free apart of daily life</p>
+<section id="about-hero">
+  <div class="container-fluid">
+      <div class="row text-center pt-5">
+          <div class="col-md-5 p-lg-5 mx-auto white-text" id="hero-content-col">
+              <h1 class="display-4 fw-normal pb-2">About us</h1>
+              <h4 class="pb-3">Making a gluten free diet easier for both you and your family</h4>
           </div>
-        </div>
       </div>
+  </div>
+</section>
+</section>
+  <section id="about-us" class="pb-5">
+    <div class="container text-center">
+       <div class="row text-center py-5">
+          <div class="col">
+             <h2 class="display-5 fw-bold orange-color">How it all started</h2>
+          </div>
+       </div>
+       <div class="row text-center pb-4">
+          <div class="col-12">
+             <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+             </h5>
+          </div>
+       </div>
+       <div class="row">
+         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+         </p>
+             <a class="btn btn-primary" href="">Search our recipes</a>
+          </div>
+       </div>
     </div>
-  </header>
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-            <a href="post.html">
-                <h2 class="post-title">
-                    Man must explore, and this is exploration at its greatest
-                </h2>
-                <h3 class="post-subtitle">
-                    Problems look mighty small from 150 miles up
-                </h3>
-            </a>
-            <p class="post-meta">Posted by
-                <a href="#">Start Bootstrap</a>
-                on September 24, 2019</p>
-        </div>
-        <hr>
+ </section>
   {% endblock %}
