@@ -38,22 +38,28 @@ def login_required(f):
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        user = existing_user()
+        # check if username exists in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
 
-        if user:
-            if password_is_valid(user):
-                session["user"] = request.form.get("username").lower()
-                flash("Welcome back to the community, {}".format(request.form.get("username")))
-                return redirect(url_for("personal", username=session["user"]))
+        if existing_user:
+            # ensure hashed password matches user input
+            if check_password_hash(
+                existing_user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    flash("Welcome, {}".format(request.form.get("username")))
+            else:
+                # invalid password match
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for("login"))
 
-            flash("Sorry, this Username and/or Password is incorrect")
+        else:
+            # username doesn't exist
+            flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
-        flash("Oops, this Username and/or Password is incorrect")
-        return redirect(url_for("login"))
-
     return render_template("user/login.html")
-
+    
 
 # Community member - Password validation
 def existing_user():
