@@ -41,3 +41,9 @@ a.btn.btn-primary {
     border-color: #443742;
     color: #F6F5F8;
 }
+
+
+/* styling for social media icons */
+.fa-linkedin {color:#443742;}
+.fa-twitter {color:#443742;}
+.fa-facebook {color:#443742;}
