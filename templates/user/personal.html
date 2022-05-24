@@ -15,31 +15,27 @@
     <div class="row top-margins">
       <div class="col s12 center-align">
         {% for recipe in recipes if session.user|lower == recipe.recipe_created_by|lower %}
-        <div class="card bottom-margins">
-          <div class="card-image">
-            <img src="{{ recipe.recipe_image_1 }}" alt="Image of {{ recipe.recipe_name }}" loading="lazy">
-            <span class="card-title center-align">{{ recipe.recipe_name }}</span>
-          </div>
-          <div class="card-content bg-white">
-            <p>{{ recipe.recipe_overview }}<br><br>
+        <div class="card mb-3">
+            <img src="{{ recipe.recipe_image_1 }}" alt="Image of {{ recipe.recipe_name }}" loading="lazy"  class="card-img-top">
+            <h5 class="card-title">{{ recipe.recipe_name }}</h5>
+            <p class="card-text">{{ recipe.recipe_overview }}<br><br>
               Preparation time about {{ recipe.recipe_preparation_time }} minutes.<br><br>
               Recipe for {{ recipe.recipe_servings }} persons.
             </p>
           </div>
-          <div class="row bg-white">
+          <div class="btn-group btn-group-lg" role="group" aria-label="Go to recipe">
             <a href="{{ url_for('specific_recipe', recipe_id=recipe._id) }}"
-              class="btn-large btn-green center-align recipe-margins">
-              Go to recipe <i class="fas fa-arrow-alt-circle-right prefix"></i>
+              class="btn btn-primary center-align recipe-margins">
+              Go to recipe
             </a>
+            <br>
             {% if session.user|lower == recipe.recipe_created_by|lower %}
             <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}"
-              class="btn-large btn-blue center-align recipe-margins">
-              Edit recipe <i class="fas fa-edit prefix"></i>
-            </a>
+              class="btn btn-info center-align recipe-margins">
+              Edit recipe </a>
             <button data-target="{{ recipe._id }}" type="button"
-              class="modal-trigger btn-large btn-red center-align recipe-margins">
-              Delete recipe <i class="fas fa-trash-alt prefix"></i>
-            </button>
+              class="modal-trigger btn btn-warning center-align recipe-margins">
+              Delete recipe  </button>
           </div>
         </div>
         <!-- Delete Recipe Modal -->

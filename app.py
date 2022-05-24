@@ -172,7 +172,7 @@ def add_recipe():
     if request.method == "POST":
         recipe = display_recipes(request)
         mongo.db.recipes.insert_one(recipe)
-        flash("You've successfully shared yourr recipe")
+        flash("You've successfully shared your recipe")
         return redirect(url_for("personal", username=session["user"]))
     return render_template("recipe/add_recipes.html")     
 
