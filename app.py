@@ -82,7 +82,6 @@ def register():
         mongo.db.users.insert_one(register)
 
         session["user"] = request.form.get("username").lower()
-        flash("Yay, you've successfully been registered with our Gluten Free & Me community")
         return redirect(url_for("personal", username=session["user"]))
 
     return render_template("user/register.html")

@@ -51,3 +51,14 @@ a.btn.btn-primary {
 .fa-linkedin {color:#443742;}
 .fa-twitter {color:#443742;}
 .fa-facebook {color:#443742;}
+
+/* Personal Profile Page updates */
+h4.no-results-text {
+    color: #212529
+}
+
+a.btn.btn-secondary {
+    background: #cacaaa;
+    border-color: #cacaaa;
+    color: #212529
+}
