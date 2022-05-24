@@ -32,23 +32,7 @@
         {% if recipes|length > 0 %}
         {% for recipe in recipes %}
         <div class="row text-center">
-            <div class="col-md-4 col-sm-12">
-                <div class="card">
-                    <h3 class="card-title py-3">{{ recipe.recipe_name }}</h3>
-                    <img class="card-img-top" src="{{ recipe.recipe_image_1 }}" alt="Image of {{ recipe.recipe_name }}"
-                        loading="lazy">
-                    <div class="card-body">{{ recipe.recipe_introduction }}
-                        <p class="card-text">
-                        </p>
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <button href="{{ url_for('specific_recipe', recipe_id=recipe._id) }}"
-                                class="btn btn-primary" type="button">Get recipe</button>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
+            <div class="col">
                 <div class="card">
                     <h3 class="card-title py-3">{{ recipe.recipe_name }}</h3>
                     <img class="card-img-top" src="{{ recipe.recipe_image_1 }}" alt="Image of {{ recipe.recipe_name }}"
@@ -63,22 +47,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="card">
-                    <h3 class="card-title py-3">{{ recipe.recipe_name }}</h3>
-                    <img class="card-img-top" src="{{ recipe.recipe_image_1 }}" alt="Image of {{ recipe.recipe_name }}"
-                        loading="lazy">
-                    <div class="card-body">{{ recipe.recipe_introduction }}
-                        <p class="card-text">
-                        </p>
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <button href="{{ url_for('specific_recipe', recipe_id=recipe._id) }}"
-                                class="btn btn-primary" type="button">Get recipe</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     {% endfor %}
     {% else %}
 </section>
