@@ -60,5 +60,20 @@ h4.no-results-text {
 a.btn.btn-secondary {
     background: #cacaaa;
     border-color: #cacaaa;
-    color: #212529
+    color: #212529;
+}
+
+/* Add Page updates */
+h4.center-align {
+    color: #212529;
+}
+
+a.btn.btn-info {
+    background: #e4def7;
+    border-color: #e4def7;
+}
+
+button.btn.btn-info {
+    background: #e4def7;
+    border-color: #e4def7;
 }

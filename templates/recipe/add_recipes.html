@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
+<section id="add-section">
   <div class="container">
     <div class="row">
       <div class="col s12">
-        <h5 class="center-align">Add recipe</h5>
+        <h4 class="center-align">Add recipe</h4>
       </div>
     </div>
     <div class="row">
@@ -13,55 +14,49 @@
           <!-- Recipe name -->
           <div class="row">
             <div class="input-field col s12">
-              <i class="fas fa-pen-alt prefix"></i>
-              <input id="recipe_name" name="recipe_name" type="text" data-length="50" minlength="3" 
-                maxlength="50" class="validate" required>
               <label for="recipe_name">Recipe name</label>
+              <input id="recipe_name" name="recipe_name" class="form-control" type="text" placeholder="Enter recipe name" data-length="50" minlength="3" 
+              maxlength="50" class="validate" required>
             </div>
           </div>
+          <br>
           <!-- Introduction -->
           <div class="row">
             <div class="input-field col s12">
-              <i class="fas fa-book-open prefix"></i>
-              <textarea id="recipe_introduction" name="recipe_introduction"  data-length="200" minlength="5" maxlength="200"
-                class="materialize-textarea validate" required></textarea>
               <label for="recipe_overview">Introduction</label>
+              <div class="input-group">
+                <textarea id="recipe_introduction" name="recipe_introduction" class="form-control" placeholder="Enter recipe introduction" data-length="200" minlength="5" maxlength="200"
+                class="validate" required></textarea>
+              </div>
             </div>
           </div>
           <!-- Preparation time -->
           <div class="row">
             <div class="input-field col s12">
-              <i class="fas fa-hourglass-start prefix"></i>
-              <input id="recipe_preparation_time" name="recipe_preparation_time" type="number" min="1" 
-                max="180" class="validate" required>
               <label for="recipe_preparation_time">Preparation time in minutes</label>
+              <input id="recipe_preparation_time" name="recipe_preparation_time" class="form-control" type="number" min="1" max="180" class="validate" required>
             </div>
           </div>
           <!-- Servings -->
           <div class="row">
             <div class="input-field col s12">
-              <i class="fas fa-users prefix"></i>
-              <input id="recipe_servings" name="recipe_servings" type="number" min="1" max="20"
-                class="validate" required>
               <label for="recipe_servings">Servings</label>
+              <input id="recipe_servings" name="recipe_servings"  class="form-control" type="number" min="1" max="20" class="validate" required>
             </div>
           </div>
           <!-- Ingredients -->
           <div class="row">
             <div class="input-field col s12">
-              <i class="fas fa-cookie-bite prefix"></i>
-              <input id="recipe_ingredients" name="recipe_ingredients" type="text" data-length="150" minlength="2" 
+              <label for="recipe_ingredients">Ingredient 1 - add each seperate </label>
+              <input id="recipe_ingredients" name="recipe_ingredients" class="form-control" type="text" data-length="150" minlength="2" 
                 maxlength="150" class="validate" required>
-              <label for="recipe_ingredients">Ingredient 1. </label>
             </div>
           </div>
           <div class="row list_of_ingredients">
-
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <a class="right btn-small btn-green-ingredient add_ingredient">
-                <i class="fas fa-plus"></i> 
+              <a class="btn btn-info add_ingredient">
                 Add ingredient
               </a>
             </div>
@@ -69,10 +64,10 @@
           <!-- Instruction -->
           <div class="row">
             <div class="input-field col s12">
-              <i class="fas fa-utensil-spoon prefix"></i>
-              <input id="recipe_instruction" name="recipe_instruction" type="text" data-length="500" minlength="5" maxlength="500"
-                class="validate" required>
               <label for="recipe_instruction">Instruction step 1. </label>
+              <input id="recipe_instruction" name="recipe_instruction" class="form-control"  type="text" data-length="500" minlength="5" maxlength="500"
+                class="validate" required>
+            
             </div>
           </div>
           <div class="row list_of_instruction_steps">
@@ -80,8 +75,7 @@
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <a class="right btn-small btn-green-ingredient add_instruction_step">
-                <i class="fas fa-plus"></i> 
+              <a class="btn btn-info add_instruction_step">
                 Add instruction step
               </a>
             </div>
@@ -90,22 +84,18 @@
           <div class="row">
             <h6 class="center-align">You can upload max 2 images</h6>
             <div class="input-field col s12">
-              <i class="fas fa-image prefix"></i>
               <input id="recipe_image_1" name="recipe_image_1" type="url"
-                class="validate" required>
-              <label for="recipe_image_1">Place your 1st image url here</label>
+              class="form-control" placeholder= "Place your 1st image url here" class="validate" required>
             </div>
             <div class="input-field col s12">
-              <i class="fas fa-image prefix"></i>
               <input id="recipe_image_2" name="recipe_image_2" type="url"
-                class="validate">
-              <label for="recipe_image_2">Place your 2nd image url here</label>
+              class="form-control" placeholder= "Place your 2nd image url here"  class="validate">
             </div>
           </div>
           <!-- Add recipe button -->
           <div class="row">
             <div class="col s12 center-align">
-              <button type="submit" class="btn-large btn-green center-align bottom-margins">
+              <button type="submit" class="btn btn-info center-align bottom-margins">
                 Add recipe
               </button>
             </div>
@@ -114,5 +104,5 @@
       </form>
     </div>
   </div>
-
+</section>
 {% endblock %}
