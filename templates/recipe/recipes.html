@@ -1,75 +1,87 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- hero-->
+<!-- hero & search-->
 <header>
-<section id="hero-section">
-    <div class="container-fluid">
-        <div class="row text-center pt-5">
-            <div class="col-md-5 p-lg-5 mx-auto white-text" id="hero-content-col">
-                <h1 class="display-4 fw-normal pb-2">Gluten free &amp; you</h1>
-                <h4 class="pb-3">Everyday recipes to support changes in your lifestyle</h4>
-                <form method="POST" action="{{ url_for('search') }}">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-10 mx-auto">
-                            <input type="text" name="query" id="query" minlength="5" class="validate" required>
+    <section id="hero-section">
+        <div class="container-fluid">
+            <div class="row text-center pt-5">
+                <div class="col-md-5 p-lg-5 mx-auto white-text" id="hero-content-col">
+                    <h1 class="display-4 fw-normal pb-2">Gluten free &amp; you</h1>
+                    <h4 class="pb-3">Everyday recipes to support changes in your lifestyle</h4>
+                    <form action="{{ url_for('search') }}" method="POST">
+                        <div class="row input-field">
+                            <div class="col-lg-8 col-md-10 mx-auto">
+                                <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                            </div>
+                            <div class="col-lg-8 col-md-10 mx-auto">
+                                <button type="submit" class="btn btn-primary">Search Recipes</button>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" href="{{ url_for('get_recipes') }}">Reset</button>
+                            </div>
                         </div>
-                        <div class="col-lg-8 col-md-10 mx-auto">
-                            <button type="submit" class="btn btn-primary" method="POST" action="{{ url_for('search') }}">Search Recipes</button>
-                            <button type="submit" class="btn btn-primary" href="{{ url_for('get_recipes') }}">Reset</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </header>
-  <!-- Recipe list -->
-  <section id="recipe-overview" class="pb-5">
-  <div class="container">
-      <div class="row text-center">
-          <div class="col-md-4 col-sm-12">
-              <div class="card">
-                  <h3 class="card-title py-3">Your recipes are a click away</h3>
-                  <img class="card-img-top" src="./static/img/home-bg.jpg" alt="Support businesses on social media">
-                  <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
-                      <p class="card-text">
-                      </p>
-                      <div class="d-grid gap-2 col-6 mx-auto">
-                          <button class="btn btn-primary" type="button">Button</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4 col-sm-12">
-              <div class="card">
-                  <h3 class="card-title py-3">Your recipes are a click away</h3>
-                  <img class="card-img-top" src="./static/img/home-bg.jpg" alt="Support businesses on social media">
-                  <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
-                      <p class="card-text">
-                      </p>
-                      <div class="d-grid gap-2 col-6 mx-auto">
-                          <button class="btn btn-primary" type="button">Button</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4 col-sm-12">
-              <div class="card">
-                  <h3 class="card-title py-3">Your recipes are a click away</h3>
-                  <img class="card-img-top" src="./static/img/home-bg.jpg" alt="Support businesses on social media">
-                  <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
-                      <p class="card-text">
-                      </p>
-                      <div class="d-grid gap-2 col-6 mx-auto">
-                          <button class="btn btn-primary" type="button">Button</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+<!-- Recipe list -->
+<section id="recipe-overview" class="pb-5">
+    <div class="container">
+        {% if recipes|length > 0 %}
+        {% for recipe in recipes %}
+        <div class="row text-center">
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <h3 class="card-title py-3">{{ recipe.recipe_name }}</h3>
+                    <img class="card-img-top" src="{{ recipe.recipe_image_1 }}" alt="Image of {{ recipe.recipe_name }}"
+                        loading="lazy">
+                    <div class="card-body">{{ recipe.recipe_introduction }}
+                        <p class="card-text">
+                        </p>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button href="{{ url_for('specific_recipe', recipe_id=recipe._id) }}"
+                                class="btn btn-primary" type="button">Get recipe</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <h3 class="card-title py-3">{{ recipe.recipe_name }}</h3>
+                    <img class="card-img-top" src="{{ recipe.recipe_image_1 }}" alt="Image of {{ recipe.recipe_name }}"
+                        loading="lazy">
+                    <div class="card-body">{{ recipe.recipe_introduction }}
+                        <p class="card-text">
+                        </p>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button href="{{ url_for('specific_recipe', recipe_id=recipe._id) }}"
+                                class="btn btn-primary" type="button">Get recipe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <h3 class="card-title py-3">{{ recipe.recipe_name }}</h3>
+                    <img class="card-img-top" src="{{ recipe.recipe_image_1 }}" alt="Image of {{ recipe.recipe_name }}"
+                        loading="lazy">
+                    <div class="card-body">{{ recipe.recipe_introduction }}
+                        <p class="card-text">
+                        </p>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button href="{{ url_for('specific_recipe', recipe_id=recipe._id) }}"
+                                class="btn btn-primary" type="button">Get recipe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
 </section>
+<h3 class="bottom-margins no-results-text center-align">No recipes were found</h3>
+{% endif %}
 {% endblock %}
