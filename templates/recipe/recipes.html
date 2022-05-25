@@ -41,14 +41,14 @@
                         <p class="card-text">
                         </p>
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <a href="{{ url_for('specific_recipe', recipe_id=recipe._id) }}"
-                                class="btn btn-primary" type="button">Get recipe</a>
+                            <a href="{{ url_for('specific_recipe', recipe_id=recipe._id) }}" class="btn btn-primary"
+                                type="button">Get recipe</a>
                         </div>
                     </div>
                 </div>
             </div>
-    {% endfor %}
-    {% else %}
+            {% endfor %}
+            {% else %}
 </section>
 <h3 class="bottom-margins no-results-text center-align">No recipes were found</h3>
 {% endif %}
