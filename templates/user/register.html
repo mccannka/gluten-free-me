@@ -6,25 +6,27 @@
 <div class="row">
     <!--Username-->
     <form class="form-floating" method="POST" action="{{ url_for('register') }}">
-        <input type="email" class="form-control" id="username" name="username" placeholder="name@example.com"
-            value="test@example.com" class="validate" required>
-        <label for="floatingInputValue">Email address</label>
+        <input type="email" class="form-control" id="username" name="username" placeholder="name@example.com" class="validate" required>
+        <label for="username">Email address</label>
+        <span class="helper-text" data-error="wrong" data-success="right">
+            Please enter a valid email address
+        </span>
         <div class="form-floating">
             <!-- Password -->
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" id="password"
-                name="password" type="password" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$"
-                class="validate" required>
-            <label for="floatingPassword">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+                type="password" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+            <span class="helper-text" data-error="wrong" data-success="right">
+                Please use 5-25 characters and letters and numbers only
+            </span>
+            <label for="password">Password</label>
         </div>
-    </form>
-    <!-- register -->
-    <div class="row">
-        <button type="submit" class="col s12 btn btn-info">
-            Register <i class="fas fa-sign-in-alt"></i>
-        </button>
-    </div>
+        <!-- register -->
+        <div class="row">
+            <button type="submit" class="col s12 btn btn-info">
+                Register <i class="fas fa-sign-in-alt"></i>
+            </button>
+        </div>
 </div>
-</form>
 </div>
 <div class="row">
     <div class="col s12">
@@ -34,4 +36,5 @@
         </p>
     </div>
 </div>
+</form>
 {% endblock %}
