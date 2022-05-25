@@ -6,7 +6,6 @@
             <div class="col-md-5 p-lg-5 mx-auto white-text" id="hero-content-col">
                 <h1 class="display-4 fw-normal pb-2">Gluten free &amp; you</h1>
                 <h4 class="pb-3">Everyday recipes to support changes in your lifestyle</h4>
-                <a class="btn btn-primary" href="">Find out more</a>
             </div>
         </div>
     </div>
@@ -22,46 +21,101 @@
         <div class="row text-center">
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <h3 class="card-title py-3">Your recipes are a click away</h3>
-                    <img class="card-img-top" src="./static/img/home-bg.jpg" alt="Support businesses on social media">
-                    <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
+                    <h3 class="card-title py-3">Community</h3>
+                    <img class="card-img-top" src="{{ url_for('static', filename='img/community-hp.png') }}" alt="Our gluten free community">
+                    <div class="card-body">Create an account and start sharing your recipes today, as well as view recipes from other members.
                         <p class="card-text">
                         </p>
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <button class="btn btn-primary" type="button">Button</button>
+                            <a class="btn btn-primary" href="{{ (url_for('register')) }}" type="button">Register today</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <h3 class="card-title py-3">Your recipes are a click away</h3>
-                    <img class="card-img-top" src="./static/img/home-bg.jpg" alt="Support businesses on social media">
-                    <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
+                    <h3 class="card-title py-3">Everyday recipes</h3>
+                    <img class="card-img-top" src="{{ url_for('static', filename='img/food-hp.png') }}" alt="Example of gluten free food">
+                    <div class="card-body">We aim to take the fuss out of going gluten free, putting you in control of your diet.
                         <p class="card-text">
                         </p>
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <button class="btn btn-primary" type="button">Button</button>
+                            <a class="btn btn-primary" href="{{ (url_for('get_recipes')) }}" type="button">Search recipes</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <h3 class="card-title py-3">Your recipes are a click away</h3>
-                    <img class="card-img-top" src="./static/img/home-bg.jpg" alt="Support businesses on social media">
-                    <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
+                    <h3 class="card-title py-3">Supports for you</h3>
+                    <img class="card-img-top" src="./static/img/support-hp.png" alt="Support for coeliacs">
+                    <div class="card-body">We understand our community won't have all the answers, so we'll also signpost other supports too.
                         <p class="card-text">
                         </p>
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <button class="btn btn-primary" type="button">Button</button>
+                            <a class="btn btn-primary" href="https://www.coeliac.org.uk/home/" type="button">Visit coeliac.org.uk</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+</section>
+<section id="contact-us">
+        <div class="col s12 center-align">
+          <h5>
+            Can't find what you're looking for? Please send us feedback below.
+          </h5>
+        </div>
+        <form class="col s12" name="form" action="#" onsubmit="return sendMail(this);">
+          <div class="card-panel">
+            <div class="row">
+              <div class="col s12">
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <label for="name">Name</label>
+                <input id="name" name="name" class="form-control" type="text" minlength="2" maxlength="50"
+                  class="validate" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <label for="email">Email address</label>
+                <input id="email" name="email" class="form-control" type="email" minlength="5" maxlength="50"
+                  class="validate" required>
+                 <span class="helper-text" data-error="wrong" data-success="right">
+                  Please use a valid email address
+                </span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <label for="message">Feedback</label>
+                <textarea id="message" name="message" class="form-control" data-length="500" minlength="5" maxlength="500"
+                  class="validate" required></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <p>
+                  <label id="checkbox" class="no-robot-checkbox">
+                    <input type="checkbox" required="" aria-required="true" />
+                    <span>I'm not a robot!</span>
+                  </label>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 center-align bottom-margins">
+                <button type="submit" class="btn btn-primary center-align" id="btnSubmit"> 
+                  Send <i class="fas fa-paper-plane prefix"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
 </section>
 {% endblock %}
