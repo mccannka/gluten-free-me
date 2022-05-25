@@ -1,112 +1,213 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+GLUTEN FREE & ME
+======
 
-<<<<<<< HEAD
-Welcome USER_NAME,
-=======
-Welcome mccannka,
->>>>>>> f6cd57f (Initial commit)
+**[Code Institute](https://learn.codeinstitute.net/ci_program/diplomainsoftwaredevelopment)  Milestone Project 3: Backend Development**
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+<img src="static/img/company-logo.png" alt="Logo" width="15%" height="15%"> 
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+GLUTEN FREE & ME is a site for those who suffer from Gluten intolerance, to enable recipe sharing so that those with a gluten tolerance still have a varied diet.  The site's primary goal is to enable sharing of recipes and creation of a community.  When you are logged in, you can add, edit and delete your own recipes.
+This project will embed learnings around HTML, CSS, JavaScript and Python.
 
-## Gitpod Reminders
+Demo
+======
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+**<details><summary>UX</summary>**
+* [**_User stories_**](#user-stories)
+    * [_Strategy_](#strategy)
+    * [_Scope_](#scope)
+    * [_Structure_](#structure)
+    * [_Wireframes_](#wireframes)
+</details>
 
-`python3 -m http.server`
+**<details><summary>Features</summary>**
+* [**_Existing Features_**](#existing-features)
+* [**_Features for the future_**](#features-for-the-future)
+</details>
 
-A blue button should appear to click: _Make Public_,
+**<details><summary>Technologies</summary>**
+* [**_Languages_**](#languages)
+* [**_Libraries and frameworks_**](#libraries-and-frameworks)
+* [**_Wireframes_**](#wireframes)
+* [**_Tools_**](#tools)
+</details>
 
-Another blue button should appear to click: _Open Browser_.
+**<details><summary>Testing and Bugs</summary>**
+* [**_Testing file_**](#testing-file)
+</details>
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+**<details><summary>Deployment</summary>**
+* [**_Deployment_**](#deployment)
+</details>
 
-A blue button should appear to click: _Make Public_,
+**<details><summary>Credits</summary>**
+* [**_Content_**](#content)
+* [**_Code_**](#code)
+* [**_Media_**](#media)
+* [**_Other_**](#other)
+* [**_Acknowledgements_**](#acknowledgements)
+</details>
+<br>
+<div align="right"><a href="#top">🔝</a></div>
 
-Another blue button should appear to click: _Open Browser_.
+UX
+======
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+This is a website aimed at visitors who suffer from gluten intolerances and want to widen their daily menu, broadening their recipes.  It also will enable vistors to share their favourite recipes and build a community
 
-To log into the Heroku toolbelt CLI:
+### User stories
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+##### Visitor Goals
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+- To create an account and log in on that account.
+- To create, read, update and delete my own recipes.
+- To be able to see different recipes and search for them using keywords.
 
-------
 
-## Release History
+##### Site Owners Goals
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+- Share everyday Gluten free recipes that can be reused within the comminity.
+- To promote that having an intolerance can be supported within everyday life.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Strategy
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+The design goal is to make a clear, accessible, structured site so that visitors can easily see the recipes, navigate on the site and add, edit and delete their own recipes.  This should be responsive on all device types.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+### Scope
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+The site will have:
+- A homepage with a small introduction. 
+- An about page which tells a bit about the creator of the site and why the site was created. Furthermore,
+- A recipes page on which you can you choose to go to a specific recipe. 
+- A register page, a log in page, a personal recipe page and a add recipe page.
+The personal recipe page, add recipe page and the log out option will only be visible when you are logged in.
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+| Sidenav | Logged in User | Logged out User |
+ --- | --- | ---
+Home| &#9989; | &#9989; |
+About |&#9989; | &#9989; |
+Recipes|&#9989; | &#9989; |
+Register| &#10060; | &#9989; |
+Log in| &#10060; | &#9989; |
+Personal recipe page| &#9989; | &#10060; |
+Add recipe| &#9989; | &#10060; |
+Log out| &#9989; | &#10060; |
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+Also on the homepage there is a difference in what you will see when you are logged in or logged out.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+| Homepage | Logged in User | Logged out User |
+ --- | --- | ---
+Register button | &#10060; | &#9989; |
+Log in button  | &#10060; | &#9989; |
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+A difference has also been made in user rights:
+| Recipe options | Standard User Account | Admin User Account |
+ --- | --- | ---
+Add own recipe| &#9989; | &#9989; |
+Edit own recipe | &#9989; | &#9989; |
+Delete own recipe | &#9989; | &#9989; |
+Edit recipes of other users| &#10060; | &#9989; |
+Delete recipes of other users| &#10060; | &#9989; |
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+### Structure
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+The site will be structured as clear as possible, it should be easy to see what you can do on the page, responsive on all screen sizes.  It should be clear what you can do on each part of the site. 
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+### Wireframes
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+- Desktop wireframe [file](static/img/desktop.png)
+- Mobile wireframe [file](static/img/mobile-app.png)
+- Ipad wireframe [file](static/img/ipad.png)
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+Features
+======
 
-------
+### Existing Features
 
-## FAQ about the uptime script
+The site contains the following features: 
 
-**Why have you added this script?**
+- See an overview of multiple recipes.
+- Select a specific recipe and see the details of that recipe.
+- Have clear and easy to use page navigation.
+- Register an account.
+- Log in to that account and log out of it.
+- Add, edit and delete your own recipes.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+### Features for the future 
 
-**How will this affect me?**
+The following items can be added: 
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+- Comment on other people’s recipes.
+- Being able to share a recipe on social media.
+- Being able to print out a recipe directly from the site with one click on a button. 
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+Technologies
+======
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+### Languages
 
-**So….?**
+- HTML
+- CSS
+- Python
+- JavaScript
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+### Libraries and Frameworks
 
-**Can I opt out?**
+- Materialize 1.0.0
+- jQuery
+- PyMongo
+- Flask
+- Jinja
+- Werkzeug
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+### Wireframes
+- Balsamiq (https://balsamiq.cloud/)
 
-**Anything more?**
+### Tools
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+- [Canvas](https://www.canva.com/): to resize images and create a company logo.
+- [VSCode](https://code.visualstudio.com/): to write the code in.
+- [MongoDB Atlas](https://www.mongodb.com/): as a database for this project.
+- [Heroku](https://www.heroku.com/): as a host for the deployed site.
+- [GitHub](https://github.com/): for the repository.
 
----
+Testing and Bugs 
+======
 
-Happy coding!
+Deployment
+======
+
+### Deployment
+
+Credits
+======
+
+### Content
+
+
+### Code:
+
+1. [Code Institute LMS Backend Development Task Manager Miniproject by Tim Nelson](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+DCP101+2017_T3/courseware/9e2f12f5584e48acb3c29e9b0d7cc4fe/054c3813e82e4195b5a4d8cd8a99ebaa/) this was used as the basis of the code and then modified to make it my own site.
+2. [W3schools](https://www.w3schools.com/howto/howto_js_collapsible.asp) to help me make a collapsible with HTML and JavaScript.
+3. [W3schools](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp) to help me make a scroll back to the top button.
+4. [Autoprefixer CSS](https://autoprefixer.github.io/) to optimize the use of vendor extensions in the CSS code.
+5. [Python Programming](https://pythonprogramming.net/decorator-wrappers-flask-tutorial-login-required/) as how to use the Login_Required decorator.
+
+
+### Media 
+
+#### Images
+
+### Other
+
+1. [RandomKeygen](https://randomkeygen.com/) to get a value for the secret key.
+2. [cdnjs](https://cdnjs.com/) to get the fontawesome cdn from.
+3. [jQuery](https://code.jquery.com/) to get the jQuery cdn from.
+4. [Am I Responsive?](http://ami.responsivedesign.is/) to check the responsiveness and make the mockups.
+5. [WebAIM](https://webaim.org/resources/contrastchecker/) used for checking contrasts on the site.
+
+### Acknowledgements
+
+- My mentor and tutors from Code Institute guiding me through each stage of this project.
+- Fellow slack team members.
