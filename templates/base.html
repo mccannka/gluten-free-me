@@ -75,6 +75,26 @@
             id="copyright"></span></div>
    </footer>
 
+   
+	<!-- Log out Modal -->
+	<div id="log-out-modal" class="modal">
+		<div class="modal-content center-align">
+			<h4 class="card-header">Are you sure you want to logout?</h4>
+			<p>
+				It's not too late to change your mind!
+			</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close btn-flat">
+				<span class="text-keep">No, I'll stay!</span>
+			</a>
+			<a href="{{ url_for('logout') }}"
+				class="modal-action modal-close btn-flat">
+				<span class="text-delete">Yes, log me out!</span>
+			</a>
+		</div>
+	</div>
+
    <!-- Bootstrap core JavaScript -->
    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
