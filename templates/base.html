@@ -21,8 +21,8 @@
       <nav class="navbar navbar-expand-lg navbar-light">
          <div class="container-fluid">
             <a class="navbar-brand" href="#">
-               <img src="{{ url_for('static', filename='img/company-logo.png') }}" class="d-none d-sm-block" alt="Company Logo" width="120"
-                  height="120"></a>
+               <img src="{{ url_for('static', filename='img/company-logo.png') }}" class="d-none d-sm-block"
+                  alt="Company Logo" width="120" height="120"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                aria-label="Toggle navigation">
@@ -75,25 +75,24 @@
             id="copyright"></span></div>
    </footer>
 
-   
-	<!-- Log out Modal -->
-	<div id="log-out-modal" class="modal">
-		<div class="modal-content center-align">
-			<h4 class="card-header">Are you sure you want to logout?</h4>
-			<p>
-				It's not too late to change your mind!
-			</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close btn-flat">
-				<span class="text-keep">No, I'll stay!</span>
-			</a>
-			<a href="{{ url_for('logout') }}"
-				class="modal-action modal-close btn-flat">
-				<span class="text-delete">Yes, log me out!</span>
-			</a>
-		</div>
-	</div>
+
+   <!-- Log out Modal -->
+   <div id="log-out-modal" class="modal">
+      <div class="modal-content center-align">
+         <h4 class="card-header">Are you sure you want to logout?</h4>
+         <p>
+            It's not too late to change your mind!
+         </p>
+      </div>
+      <div class="modal-footer">
+         <a href="#!" class="modal-action modal-close btn-flat">
+            <span class="text-keep">No, I'll stay!</span>
+         </a>
+         <a href="{{ url_for('logout') }}" class="modal-action modal-close btn-flat">
+            <span class="text-delete">Yes, log me out!</span>
+         </a>
+      </div>
+   </div>
 
    <!-- Bootstrap, JS  & JS Email -->
    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
