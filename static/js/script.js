@@ -10,7 +10,7 @@ document.getElementById('form')
     btn.value = 'Thanks - we will come back to you in 24 hours';
 
     const serviceID = 'default_service';
-    const templateID = 'template_fpmgm4c';
+    const templateID = 'template_f34ria5';
 
     emailjs.sendForm(serviceID, templateID, this)
       .then(() => {
