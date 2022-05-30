@@ -70,62 +70,32 @@
         </div>
 </section>
 <!--Contact us / feeback panel-->
-<section id="contact-us">
-    <div class="col s12 center-align">
-        <h5>
-            Can't find what you're looking for? Please send us feedback below.
-        </h5>
-    </div>
-    <form class="col s12" name="form" action="#" onsubmit="return sendMail(this);">
-        <div class="card-panel">
-            <div class="row">
-                <div class="col s12">
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <label for="name">Name</label>
-                    <input id="name" name="name" class="form-control" type="text" minlength="2" maxlength="50"
-                        class="validate" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <label for="email">Email address</label>
-                    <input id="email" name="email" class="form-control" type="email" minlength="5" maxlength="50"
-                        class="validate" required>
-                    <span class="helper-text" data-error="wrong" data-success="right">
-                        Please use a valid email address
-                    </span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <label for="message">Feedback</label>
-                    <textarea id="message" name="message" class="form-control" data-length="500" minlength="5"
-                        maxlength="500" class="validate" required></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <p>
-                        <label id="checkbox" class="no-robot-checkbox">
-                            <input type="checkbox" required="" aria-required="true" />
-                            <span>I'm not a robot!</span>
-                        </label>
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 center-align bottom-margins">
-                    <button type="submit" class="btn btn-primary center-align" id="btnSubmit">
-                        Send <i class="fas fa-paper-plane prefix"></i>
-                    </button>
-                </div>
+<section id="contact-us" class="pb-5">
+    <div class="container text-center">
+        <div class="row text-center py-5">
+            <div class="col">
+                <h2 class="display-5 fw-bold orange-color">Didn't find what you were looking for?</h2>
             </div>
         </div>
-    </form>
-    </div>
-    </div>
+        <div class="row text-center pb-4">
+            <div class="col-12">
+                <h5>Please leave us your feedback and we'll be in touch.</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <form id="form">
+                    <div class="field">
+                        <label for="from_email"></label>
+                        <input type="text" class="form-control" name="from_email" id="from_email" placeholder="Your email" />
+                    </div>
+                    <div class="field">
+                        <label for="message"></label>
+                        <input type="text" class="form-control" name="message" id="message" placeholder="Your message"/>
+                    </div>
+                    <input type="submit" class="btn btn-primary contact-btn" id="button" value="Contact me" />
+                </form>
+                <br />
+            </div>
 </section>
 {% endblock %}
