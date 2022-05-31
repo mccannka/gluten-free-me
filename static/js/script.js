@@ -43,37 +43,3 @@ $("main").on('click', ".remove_instruction_step", function () {
   $(this).parent('div').remove();
   instruction_step--;
 });
-
-// ---------- Ingredients and instructions lists ----------
-
-let list = document.getElementsByClassName("collapsible-list");
-let i;
-
-for (i = 0; i < list.length; i++) {
-  list[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    let content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } 
-  });
-}
-
-// ---------- Collapsible ingredients and instructions lists ----------
-
-let list = document.getElementsByClassName("collapsible-list");
-let i;
-
-for (i = 0; i < list.length; i++) {
-  list[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    let content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } 
-  });
-}
