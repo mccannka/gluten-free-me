@@ -213,20 +213,20 @@ def edit_recipe(recipe_id):
 @app.route("/recipe/delete/<recipe_id>")
 @login_required
 def delete_recipe(recipe_id):
-    """Existing user - delete recope """
+    """Existing user - delete recipe """
     if "user" in session:
 
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
 
         if session["user"] == 'admin':
-            mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+            mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
             flash("Your recipe has been deleted successfully")
-            return redirect(url_for("recipes"))
+            return redirect(url_for("get_recipes"))
 
         elif session["user"].lower() == recipe["recipe_created_by"].lower():
-            mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+            mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
             flash("Your recipe has been deleted successfully")
-            return redirect(url_for("recipes"))
+            return redirect(url_for("get_recipes"))
 
     flash("Oops, you can't edit other user's recipes.")
     return redirect(url_for("home"))
