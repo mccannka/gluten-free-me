@@ -59,7 +59,7 @@ def login():
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
-    return render_template("user/register.html")
+    return render_template("user/login.html")
 
 
 # Community member - Password validation
