@@ -1,4 +1,5 @@
-# Imports & Config 
+# Imports & Config
+from functools import wraps
 import os
 from flask import (
     Flask, flash, render_template,
@@ -20,8 +21,8 @@ mongo = PyMongo(app)
 
 
 # Login required
-# Requires login for enhanced functionality 
-from functools import wraps
+# Requires login for enhanced functionality
+
 
 def login_required(f):
     @wraps(f)
@@ -34,7 +35,7 @@ def login_required(f):
     return login
 
 
-# Define homepage / login option 
+# Define homepage / login option
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -45,9 +46,9 @@ def login():
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(request.form.get("username")))
+                    existing_user["password"], request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(request.form.get("username")))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -59,15 +60,15 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("user/login.html")
-    
+
 
 # Community member - Password validation
 def existing_user():
     return mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+        {"username": request.form.get("username").lower()})
 
 
-# Registration for community member 
+# Registration for community member
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -92,25 +93,25 @@ def password_is_valid(existing_user):
         existing_user["password"], request.form.get("password"))
 
 
-# Define homepage / index option 
+# Define homepage / index option
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-# Define homepage / about option 
+# Define homepage / about option
 @app.route("/about")
 def about():
     return render_template("about.html")
 
 
-#  Define homepage / recipes option 
+#  Define homepage / recipes option
 @app.route("/recipes")
 def get_recipes():
     return render_template("recipe/recipes.html")
 
 
-# Standalone recipe page 
+# Standalone recipe page
 @app.route("/recipe/<recipe_id>")
 def specific_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -140,7 +141,7 @@ def personal(username):
     return redirect(url_for("login"))
 
 
-# Log out 
+# Log out
 @app.route("/logout")
 @login_required
 def logout():
@@ -149,20 +150,20 @@ def logout():
     return redirect(url_for("login"))
 
 
-# Functionality to display recipes 
+# Functionality to display recipes
 def display_recipes(request):
-        return {
-            "recipe_name": request.form.get("recipe_name"),
-            "recipe_overview": request.form.get("recipe_overview"),
-            "recipe_preparation_time": request.form.get(
-                "recipe_preparation_time"),
-            "recipe_servings": request.form.get("recipe_servings"),
-            "recipe_ingredients": request.form.getlist("recipe_ingredients"),
-            "recipe_instruction": request.form.getlist("recipe_instruction"),
-            "recipe_image_1": request.form.get("recipe_image_1"),
-            "recipe_image_2": request.form.get("recipe_image_2"),
-            "recipe_created_by": session["user"]
-        }
+    return {
+        "recipe_name": request.form.get("recipe_name"),
+        "recipe_overview": request.form.get("recipe_overview"),
+        "recipe_preparation_time": request.form.get(
+            "recipe_preparation_time"),
+        "recipe_servings": request.form.get("recipe_servings"),
+        "recipe_ingredients": request.form.getlist("recipe_ingredients"),
+        "recipe_instruction": request.form.getlist("recipe_instruction"),
+        "recipe_image_1": request.form.get("recipe_image_1"),
+        "recipe_image_2": request.form.get("recipe_image_2"),
+        "recipe_created_by": session["user"]
+    }
 
 
 # Add recipe
@@ -174,7 +175,7 @@ def add_recipe():
         mongo.db.recipes.insert_one(recipe)
         flash("You've successfully shared your recipe")
         return redirect(url_for("personal", username=session["user"]))
-    return render_template("recipe/add_recipes.html")     
+    return render_template("recipe/add_recipes.html")
 
 
 # Edit recipe
@@ -194,7 +195,7 @@ def edit_recipe(recipe_id):
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
-                    "recipe/edit_recipes.html", recipe=recipe)
+                "recipe/edit_recipes.html", recipe=recipe)
 
         elif session["user"].lower() == recipe["recipe_created_by"].lower():
 
@@ -205,7 +206,7 @@ def edit_recipe(recipe_id):
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
-                    "recipe/edit_recipes.html", recipe=recipe)
+                "recipe/edit_recipes.html", recipe=recipe)
 
         flash("Oops, you can't edit other user's recipes.")
         return redirect(url_for("index"))
@@ -251,4 +252,3 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
-
