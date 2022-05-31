@@ -10,7 +10,6 @@
         </div>
     </div>
 </section>
-</section>
 <!--Onsite Overview-->
 <section id="community-overview" class="pb-5">
     <div class="container">
@@ -20,23 +19,7 @@
             </div>
         </div>
         <div class="row text-center">
-            <div class="col-md-4 col-sm-12">
-                <div class="card">
-                    <h3 class="card-title py-3">Community</h3>
-                    <img class="card-img-top" src="{{ url_for('static', filename='img/community-hp.png') }}"
-                        alt="Our gluten free community">
-                    <div class="card-body">Create an account and start sharing your recipes today, as well as view
-                        recipes from other members.
-                        <p class="card-text">
-                        </p>
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <a class="btn btn-primary" href="{{ (url_for('register')) }}" type="button">Register
-                                today</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <div class="card">
                     <h3 class="card-title py-3">Everyday recipes</h3>
                     <img class="card-img-top" src="{{ url_for('static', filename='img/food-hp.png') }}"
@@ -46,13 +29,13 @@
                         <p class="card-text">
                         </p>
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <a class="btn btn-primary" href="{{ (url_for('get_recipes')) }}" type="button">Search
+                            <a class="btn btn-primary" href="{{ (url_for('get_recipes')) }}">Search
                                 recipes</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <div class="card">
                     <h3 class="card-title py-3">Supports for you</h3>
                     <img class="card-img-top" src="./static/img/support-hp.png" alt="Support for coeliacs">
@@ -61,16 +44,16 @@
                         <p class="card-text">
                         </p>
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <a class="btn btn-primary" href="https://www.coeliac.org.uk/home/" type="button">Visit
+                            <a class="btn btn-primary" href="https://www.coeliac.org.uk/home/">Visit
                                 coeliac.org.uk</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <!--Contact us / feeback panel-->
-
 <section id="contact-us" class="pb-5">
     <div class="container text-center">
         <div class="row text-center py-5">
@@ -84,20 +67,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-6">
-                <form id="form">
-                    <div class="field">
-                        <label for="from_email"></label>
-                        <input type="text" class="form-control" name="from_email" id="from_email" placeholder="Your email" />
-                    </div>
-                    <div class="field">
-                        <label for="message"></label>
-                        <input type="text" class="form-control" name="message" id="message" placeholder="Your message"/>
-                    </div>
-                    <input type="submit" class="btn btn-primary contact-btn" id="button" value="Contact me" />
-                </form>
-                <br />
-            </div>
+            <form id="form">
+                <div class="field">
+                    <label for="from_email"></label>
+                    <input type="text" class="form-control" name="from_email" id="from_email"
+                        placeholder="Your email" />
+                </div>
+                <div class="field">
+                    <label for="message"></label>
+                    <input type="text" class="form-control" name="message" id="message" placeholder="Your message" />
+                </div>
+                <input type="submit" class="btn btn-primary contact-btn" id="button" value="Contact me" />
+            </form>
+            <br />
+        </div>
+    </div>
 </section>
 {% block contact_us_js %}
 <script src="{{ url_for('static', filename='js/contact_us.js') }}"></script>
