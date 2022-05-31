@@ -1,4 +1,5 @@
 """Configuration"""
+from functools import wraps
 import os
 from flask import (
     Flask, flash, render_template,
