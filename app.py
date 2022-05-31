@@ -87,12 +87,6 @@ def register():
     return render_template("user/register.html")
 
 
-def password_is_valid(identified_user):
-    """Verify if valiad password input - existing user"""
-    return check_password_hash(
-        identified_user["password"], request.form.get("password"))
-
-
 @app.route("/")
 @app.route("/home")
 def home():
@@ -152,7 +146,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-def display_recipes(from_database):
+def display_recipes(request):
     """Functionality to display recipes"""
     return {
         "recipe_name": request.form.get("recipe_name"),
@@ -180,7 +174,7 @@ def add_recipe():
     return render_template("recipe/add_recipes.html")
 
 
-@app.route("/recipe/update/<recipe_id>", methods=["GET", "POST"])
+@app.route("/recipe/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 @login_required
 def edit_recipe(recipe_id):
     """Edit existing recipe - logged in user"""
@@ -192,7 +186,7 @@ def edit_recipe(recipe_id):
 
             if request.method == "POST":
                 save = display_recipes(request)
-                mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, save)
+                mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, save)
                 flash("Your recipe has been updated successfully")
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -203,7 +197,7 @@ def edit_recipe(recipe_id):
 
             if request.method == "POST":
                 save = display_recipes(request)
-                mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, save)
+                mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, save)
                 flash("Your recipe has been updated successfully")
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
