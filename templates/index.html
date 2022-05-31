@@ -70,6 +70,7 @@
         </div>
 </section>
 <!--Contact us / feeback panel-->
+
 <section id="contact-us" class="pb-5">
     <div class="container text-center">
         <div class="row text-center py-5">
@@ -98,4 +99,7 @@
                 <br />
             </div>
 </section>
+{% block contact_us_js %}
+<script src="{{ url_for('static', filename='js/contact_us.js') }}"></script>
+{% endblock %}
 {% endblock %}
