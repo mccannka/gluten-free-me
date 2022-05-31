@@ -229,9 +229,9 @@ def edit_recipe(recipe_id):
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
                 "recipe/edit_recipes.html", recipe=recipe)
-
-        flash("Oops, you can't edit other user's recipes.")
-        return redirect(url_for("index"))
+        else:
+            flash("Oops, you can't edit other user's recipes.")
+            return redirect(url_for("index"))
     flash("Oops, you can't edit other user's recipes.")
     return redirect(url_for("index"))
 
