@@ -111,11 +111,11 @@
           </div>
           <div class="col s12 center-align">
             <!-- Cancel button -->
-            <button data-target="{{ recipe._id }}" type="button"
+            <button data-target="delete_modal{{ recipe._id }}" type="button"
               class="modal-trigger btn btn-info center-align center-align recipe-margins">
               Cancel </button>
             <!-- Edit Recipe Modal -->
-            <div id="{{ recipe._id }}" class="modal">
+            <div id="delete_modal{{ recipe._id }}" class="modal">
               <div class="modal-content">
                 <h4 class="card-header">Pay attention!</h4>
                 <p class="center-align">

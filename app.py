@@ -1,4 +1,5 @@
 """Configuration"""
+from functools import wraps
 import os
 from flask import (
     Flask, flash, render_template,
@@ -19,40 +20,18 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-@app.route("/login", methods=["GET", "POST"])
-def login_required():
+def login_required(f):
     """
-    Check whether the username exists in the database.
-    If it does, check whether the input password matches
-    the hashed password stored in the database for that username.
-    If both are true, render the home page.
-    If not, redirect to the login page with a message.
+    Login validation
     """
-    if request.method == "POST":
-        # Check if username exists in db
-        preidentified_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()}
-        )
-
-        if preidentified_user:
-            # Ensure hashed password matches user input
-            if check_password_hash(
-                preidentified_user["password"], request.form.get("password")
-            ):
-                session["user"] = request.form.get("username").lower()
-                flash("Welcome back {}".format(request.form.get("username")))
-                return redirect(url_for("user/personal"))
-            else:
-                # Invalid password match
-                flash("Incorrect Username and/or Password.")
-                return redirect(url_for("user/login"))
-
+    @wraps(f)
+    def login_input(*args, **kwargs):
+        if "user" in session:
+            return f(*args, **kwargs)
         else:
-            # Username doesn't exist
-            flash("Incorrect Username and/or Password.")
-            return redirect(url_for("user/login"))
-
-    return render_template("login.html")
+            flash("You must be logged in to proceed!")
+            return redirect(url_for("login"))
+    return login_input
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -130,7 +109,8 @@ def about():
 @app.route("/recipes")
 def get_recipes():
     """Define homepage / recipes option"""
-    return render_template("recipe/recipes.html")
+    recipes = list(mongo.db.recipes.find().sort("_id", -1))
+    return render_template("recipe/recipes.html", recipes=recipes)
 
 
 @app.route("/recipe/<recipe_id>")
@@ -231,9 +211,9 @@ def edit_recipe(recipe_id):
                 "recipe/edit_recipes.html", recipe=recipe)
         else:
             flash("Oops, you can't edit other user's recipes.")
-            return redirect(url_for("index"))
+            return redirect(url_for("home"))
     flash("Oops, you can't edit other user's recipes.")
-    return redirect(url_for("index"))
+    return redirect(url_for("home"))
 
 
 @app.route("/recipe/delete/<recipe_id>")
@@ -255,20 +235,18 @@ def delete_recipe(recipe_id):
             return redirect(url_for("recipes"))
 
     flash("Oops, you can't edit other user's recipes.")
-    return redirect(url_for("index"))
+    return redirect(url_for("home"))
 
 
 @app.errorhandler(404)
 def page_not_found(error):
     """Error 404 error state"""
-    print(error)
     return render_template('errors/404.html'), 404
 
 
 @app.errorhandler(500)
 def server_error(error):
     """Error 500 error state"""
-    print(error)
     return render_template('errors/500.html'), 500
 
 
