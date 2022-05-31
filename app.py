@@ -1,4 +1,4 @@
-# Imports & Config
+"""Configuration"""
 from functools import wraps
 import os
 from flask import (
@@ -20,32 +20,31 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# Login required
-# Requires login for enhanced functionality
-
-
 def login_required(f):
+    """
+    Login validation
+    """
     @wraps(f)
-    def login(*args, **kwargs):
+    def login_input(*args, **kwargs):
         if "user" in session:
             return f(*args, **kwargs)
         else:
             flash("You must be logged to proceed!")
             return redirect(url_for("login"))
-    return login
+    return login_input
 
 
-# Define homepage / login option
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """Define login functionality """
     if request.method == "POST":
         # check if username exists in db
-        existing_user = mongo.db.users.find_one(
+        known_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-        if existing_user:
+        if known_user:
             # ensure hashed password matches user input
             if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
+                    known_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(request.form.get("username")))
                 return redirect(url_for("personal", username=session["user"]))
@@ -62,25 +61,25 @@ def login():
     return render_template("user/login.html")
 
 
-# Community member - Password validation
 def existing_user():
+    """Existing member - Password validation"""
     return mongo.db.users.find_one(
         {"username": request.form.get("username").lower()})
 
 
-# Registration for community member
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """Registration for community member"""
     if request.method == "POST":
         if existing_user():
             flash("Oops, this username is not available!")
             return redirect(url_for("register"))
 
-        register = {
+        initial_register = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
-        mongo.db.users.insert_one(register)
+        mongo.db.users.insert_one(initial_register)
 
         session["user"] = request.form.get("username").lower()
         return redirect(url_for("personal", username=session["user"]))
@@ -89,47 +88,49 @@ def register():
 
 
 def password_is_valid(existing_user):
+    """Verify if valiad password input - existing user"""
     return check_password_hash(
         existing_user["password"], request.form.get("password"))
 
 
-# Define homepage / index option
 @app.route("/")
-def index():
+@app.route("/home")
+def home():
+    """Homepage endpoint"""
     return render_template("index.html")
 
 
-# Define homepage / about option
 @app.route("/about")
 def about():
+    """Define about option"""
     return render_template("about.html")
 
 
-#  Define homepage / recipes option
 @app.route("/recipes")
 def get_recipes():
+    """Define homepage / recipes option"""
     return render_template("recipe/recipes.html")
 
 
-# Standalone recipe page
 @app.route("/recipe/<recipe_id>")
 def specific_recipe(recipe_id):
+    """Define recipe search page"""
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template("recipe/specific_recipes.html", recipe=recipe)
 
 
-# Recipe search functionality
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """Recipe search functionality"""
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
     return render_template("recipe/recipes.html", recipes=recipes)
 
 
-# Personalised recipe page
 @app.route("/user/<username>", methods=["GET", "POST"])
 @login_required
 def personal(username):
+    """Personalised recipe page"""
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
@@ -141,17 +142,17 @@ def personal(username):
     return redirect(url_for("login"))
 
 
-# Log out
 @app.route("/logout")
 @login_required
 def logout():
+    """Logout validation path"""
     flash("You have been successfully logged out")
     session.pop("user")
     return redirect(url_for("login"))
 
 
-# Functionality to display recipes
 def display_recipes(request):
+    """Functionality to display recipes"""
     return {
         "recipe_name": request.form.get("recipe_name"),
         "recipe_overview": request.form.get("recipe_overview"),
@@ -166,10 +167,10 @@ def display_recipes(request):
     }
 
 
-# Add recipe
 @app.route("/recipe/add", methods=["GET", "POST"])
 @login_required
 def add_recipe():
+    """Add recipe - logged in user"""
     if request.method == "POST":
         recipe = display_recipes(request)
         mongo.db.recipes.insert_one(recipe)
@@ -178,10 +179,10 @@ def add_recipe():
     return render_template("recipe/add_recipes.html")
 
 
-# Edit recipe
 @app.route("/recipe/update/<recipe_id>", methods=["GET", "POST"])
 @login_required
 def edit_recipe(recipe_id):
+    """Edit existing recipe - logged in user"""
     if "user" in session:
 
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -204,22 +205,20 @@ def edit_recipe(recipe_id):
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, save)
                 flash("Your recipe has been updated successfully")
                 return redirect(url_for("personal", username=session["user"]))
-                
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
                 "recipe/edit_recipes.html", recipe=recipe)
 
         flash("Oops, you can't edit other user's recipes.")
         return redirect(url_for("index"))
-
     flash("Oops, you can't edit other user's recipes.")
     return redirect(url_for("index"))
 
 
-# Delete recipe
 @app.route("/recipe/delete/<recipe_id>")
 @login_required
 def delete_recipe(recipe_id):
+    """Existing user - delete recope """
     if "user" in session:
 
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -238,14 +237,17 @@ def delete_recipe(recipe_id):
     return redirect(url_for("index"))
 
 
-# Error states
 @app.errorhandler(404)
 def page_not_found(error):
+    """Error 404 error state"""
+    print(error)
     return render_template('errors/404.html'), 404
 
 
 @app.errorhandler(500)
 def server_error(error):
+    """Error 500 error state"""
+    print(error)
     return render_template('errors/500.html'), 500
 
 
