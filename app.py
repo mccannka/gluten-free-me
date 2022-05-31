@@ -1,5 +1,4 @@
 """Configuration"""
-from functools import wraps
 import os
 from flask import (
     Flask, flash, render_template,
@@ -20,18 +19,40 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-def login_required(f):
+@app.route("/login", methods=["GET", "POST"])
+def login_required():
     """
-    Login validation
+    Check whether the username exists in the database.
+    If it does, check whether the input password matches
+    the hashed password stored in the database for that username.
+    If both are true, render the home page.
+    If not, redirect to the login page with a message.
     """
-    @wraps(f)
-    def login_input(*args, **kwargs):
-        if "user" in session:
-            return f(*args, **kwargs)
+    if request.method == "POST":
+        # Check if username exists in db
+        preidentified_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()}
+        )
+
+        if preidentified_user:
+            # Ensure hashed password matches user input
+            if check_password_hash(
+                preidentified_user["password"], request.form.get("password")
+            ):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome back {}".format(request.form.get("username")))
+                return redirect(url_for("user/personal"))
+            else:
+                # Invalid password match
+                flash("Incorrect Username and/or Password.")
+                return redirect(url_for("user/login"))
+
         else:
-            flash("You must be logged to proceed!")
-            return redirect(url_for("login"))
-    return login_input
+            # Username doesn't exist
+            flash("Incorrect Username and/or Password.")
+            return redirect(url_for("user/login"))
+
+    return render_template("login.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -87,10 +108,10 @@ def register():
     return render_template("user/register.html")
 
 
-def password_is_valid(existing_user):
+def password_is_valid(identified_user):
     """Verify if valiad password input - existing user"""
     return check_password_hash(
-        existing_user["password"], request.form.get("password"))
+        identified_user["password"], request.form.get("password"))
 
 
 @app.route("/")
@@ -151,7 +172,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-def display_recipes(request):
+def display_recipes(from_database):
     """Functionality to display recipes"""
     return {
         "recipe_name": request.form.get("recipe_name"),
@@ -254,4 +275,5 @@ def server_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
+            # Note - change to debug=True for running locally
             debug=True)
