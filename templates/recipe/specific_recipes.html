@@ -4,14 +4,10 @@
  <div class="slider">
     <ul class="slides">
       {% if recipe.recipe_image_1 %}
-      <li>
         <img src="{{ recipe.recipe_image_1 }}" alt="First image of {{ recipe.recipe_name }}" loading="lazy">
-      </li>
       {% endif %}
       {% if recipe.recipe_image_2 %}
-      <li>
         <img src="{{ recipe.recipe_image_2 }}" alt="Second image of {{ recipe.recipe_name }}" loading="lazy">
-      </li>
       {% endif %}
     </ul>
   </div>
@@ -33,12 +29,11 @@
     </div>
     <!-- Recipe ingredients -->
     <div class="row">
-      <button class="col s12 collapsible-list">Ingredients<i class="fas fa-hand-point-down prefix"></i></button>
+      <h3 class="col s12">Ingredients</h3>
         <div class="content">
           <ul class="lists">
             {% for ingredient in recipe.recipe_ingredients %}
                 <li>
-                    <i class="fas fa-minus"></i>
                     {{ ingredient }}
                 </li>
             {% endfor %}
@@ -47,7 +42,7 @@
     </div>
     <!-- Recipe instructions -->
     <div class="row">
-      <button class="col s12 collapsible-list">Instructions<i class="fas fa-hand-point-down prefix"></i></button>
+      <h3 class="col s12">Instructions</h3>
         <div class="content">
           <ol class="lists">
             {% for step in recipe.recipe_instruction %}
