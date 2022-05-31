@@ -42,13 +42,13 @@ def login():
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(request.form.get("username")))
+                return redirect(url_for("personal", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -59,7 +59,7 @@ def login():
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
-    return render_template("user/login.html")
+    return render_template("user/register.html")
 
 
 # Community member - Password validation
@@ -204,6 +204,7 @@ def edit_recipe(recipe_id):
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, save)
                 flash("Your recipe has been updated successfully")
                 return redirect(url_for("personal", username=session["user"]))
+                
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             return render_template(
                 "recipe/edit_recipes.html", recipe=recipe)
