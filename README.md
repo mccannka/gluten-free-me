@@ -32,7 +32,9 @@ Demo
 </details>
 
 **<details><summary>Testing and Bugs</summary>**
-* [**_Testing file_**](#testing-file)
+* [**_Testing file_**](#testing-user-stories)
+* [**_Bugs identified & corrected_**](#bugs-identified-and-corrected)
+* [**_Bugs identified & uncorrected_**](#bugs-identified-and-uncorrected)
 </details>
 
 **<details><summary>Deployment</summary>**
@@ -132,9 +134,11 @@ The site contains the following features:
 
 The following items can be added: 
 
+- Ability to add more than one recipe per user - current platform is considered MVP.
 - Comment on other people’s recipes.
 - Being able to share a recipe on social media.
 - Being able to print out a recipe directly from the site with one click on a button. 
+- Tiered levels of access, with the opportunity to partner with third parties and provide a subscription service.
 
 Technologies
 ======
@@ -178,12 +182,59 @@ Technologies
 - [Tinypng](https://tinypng.com/): used to compress images.
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse): used to improve performance.
 - [JSHint](https://jshint.com/): used to check .js files.
-- [](): .
-
 
 
 Testing and Bugs 
 ======
+
+### Testing User Stories
+
+- As a user can I easily navigate to the website from Google 
+Lighthouse recommendations implemented and website scoring 100 on SEO elements [shown here](static/img/testing/lighthouse-summary-post-change.png)
+
+- As a user can I easily navigate to the recipes section, and progress through out the website 
+<br>As a user I can view when recipes are available [shown here](static/img/testing/recipe-summary-results.png)
+<br>As a user I can see when no recipes are available [shown here](static/img/testing/recipe-summary-none.png)
+
+- As a user can I search recipes available with ease
+<br>As a user I can view when recipes are available [shown here](static/img/testing/recipe-summary-results.png)
+<br>As a user I can see when no recipes are available [shown here](static/img/testing/recipe-summary-none.png)
+
+- As a user can I register for your website with ease
+<br>As a user I could register with ease via [this screen](static/img/testing/register-screen.png)
+<br>As a user when I register the navigation and landing page updates as [shown here](static/img/testing/add-a-recipe.png)
+
+- As a user can I add recipes with ease 
+<br>As a user I could register with ease via [this screen](static/img/testing/add-recipe-form.png)
+
+- As a user can I amend or delete my own recipes with ease
+<br>As a registered user I could amend a recipe with ease via [this screen](static/img/testing/edit-recipe-form.png)
+<br>As a registered user when I amended a recipe I got confimation as [shown here](static/img/testing/amend-recipe.png)
+<br>As a registered user before I delete a recipe, I got a popup to makesure this wasnt in error [shown here](static/img/testing/delete-modal.png)
+<br>As a registered user when I delete a recipe, I got confirmation [shown here](static/img/testing/delete-recipe-confirmation.png)
+
+- As a user can I login to my account with ease 
+<br>As a registered user I could login provided I knew my details using [this screen](static/img/testing/login-screen.png)
+
+- As a user can I easily provide feedback to improve the website
+<br>As a user I could leave feedback on [this screen](static/img/testing/feedback-form.png), however the confirmation receipt wasnt user friendly as [seen here](static/img/testing/feedback-confirmation.png)
+
+- As a user if I navigate to the website incorrectly, or there is a server error will I be advised
+When navigating to a page which didnt exist I received a 404 error which brought me back to the main site as [seen here](static/img/testing/404-error.png)
+
+- As a user I won't experience any delayed latency or unresponsive elements
+All elements tested above, in addition to Lighthouse, CSS and Python error checking
+
+### Bugs identified and corrected
+
+- Recommendations made from Lighthouse which uplifted performance +3 points.
+<br>Lighthouse output prechange [file](static/img/testing/lighthouse-summary.png)
+<br>Lighthouse output postchange  [file](static/img/testing/lighthouse-summary-post-change.png)
+
+- When registering to add a recipe, email address is only accepted, this is then shared across the website if you add a recipe.  Updated to accept username.
+<br>Recipe summary [here](static/img/testing/recipe-summary.png)shows email address displayed for username
+
+### Bugs identified and uncorrected
 
 Deployment
 ======
