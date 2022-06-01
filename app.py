@@ -186,7 +186,7 @@ def edit_recipe(recipe_id):
 
             if request.method == "POST":
                 save = display_recipes(request)
-                mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, save)
+                mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, save)  # noqa: E501
                 flash("Your recipe has been updated successfully")
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -197,7 +197,7 @@ def edit_recipe(recipe_id):
 
             if request.method == "POST":
                 save = display_recipes(request)
-                mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, save)
+                mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, save)  # noqa: E501
                 flash("Your recipe has been updated successfully")
                 return redirect(url_for("personal", username=session["user"]))
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
