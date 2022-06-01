@@ -8,7 +8,7 @@ GLUTEN FREE & ME
 GLUTEN FREE & ME is a site for those who suffer from Gluten intolerance, to enable recipe sharing so that those with a gluten tolerance still have a varied diet.  The site's primary goal is to enable sharing of recipes and creation of a community.  When you are logged in, you can add, edit and delete your own recipes.
 This project will embed learnings around HTML, CSS, JavaScript and Python.
 
-Demo
+On this page 
 ======
 
 **<details><summary>UX</summary>**
