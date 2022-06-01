@@ -14,7 +14,10 @@
                                 <input type="text" name="query" id="query" minlength="3" class="validate" required>
                             </div>
                             <div class="col-lg-8 col-md-10 mx-auto">
-                                <button type="submit" class="btn btn-primary">Search Recipes</button>
+                                <button type="submit" class="btn btn-primary">Search recipes</button>
+                            </div>
+                            <div class="col-lg-8 col-md-10 mx-auto">
+                                <a href="{{ url_for('get_recipes') }}" class="btn btn-info">Reset results</a>
                             </div>
                         </div>
                     </form>
