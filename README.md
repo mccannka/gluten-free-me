@@ -8,7 +8,7 @@ GLUTEN FREE & ME
 GLUTEN FREE & ME is a site for those who suffer from Gluten intolerance, to enable recipe sharing so that those with a gluten tolerance still have a varied diet.  The site's primary goal is to enable sharing of recipes and creation of a community.  When you are logged in, you can add, edit and delete your own recipes.
 This project will embed learnings around HTML, CSS, JavaScript and Python.
 
-On this page 
+On this page
 ======
 
 **<details><summary>UX</summary>**
@@ -22,6 +22,10 @@ On this page
 **<details><summary>Features</summary>**
 * [**_Existing Features_**](#existing-features)
 * [**_Features for the future_**](#features-for-the-future)
+</details>
+
+**<details><summary>Database</summary>**
+* [**_Database Structure**](#database-structure)
 </details>
 
 **<details><summary>Technologies</summary>**
@@ -44,7 +48,6 @@ On this page
 **<details><summary>Credits</summary>**
 * [**_Content_**](#content)
 * [**_Code_**](#code)
-* [**_Media_**](#media)
 * [**_Other_**](#other)
 * [**_Acknowledgements_**](#acknowledgements)
 </details>
@@ -140,6 +143,12 @@ The following items can be added:
 - Being able to print out a recipe directly from the site with one click on a button. 
 - Tiered levels of access, with the opportunity to partner with third parties and provide a subscription service.
 
+Database 
+======
+
+### Database Structure ###
+Diagram of database structure can be viewed [here](static/img/testing/database-structure.png)
+
 Technologies
 ======
 
@@ -232,9 +241,11 @@ All elements tested above, in addition to Lighthouse, CSS and Python error check
 <br>Lighthouse output postchange  [file](static/img/testing/lighthouse-summary-post-change.png)
 
 - When registering to add a recipe, email address is only accepted, this is then shared across the website if you add a recipe.  Updated to accept username.
-<br>Recipe summary [here](static/img/testing/recipe-summary.png)shows email address displayed for username
+<br>Updated recipe summary [here](static/img/testing/post-login-updated.png) shows username now being displayed.
 
 - When searching for a recipe, users couldnt easily reset search results 
+<br>Reset results CTA now available [here](static/img/testing/reset-cta.png).
+
 
 ### Bugs identified and uncorrected
 
@@ -309,6 +320,7 @@ Credits
 
 ### Content
 
+Initial recipe content, both recipe and imagery, has been taken from BBC Good Food for testing capability pending launch with live users.  A sample of recipes can be viewed [here](https://www.bbcgoodfood.com/recipes/collection/gluten-free-recipes)
 
 ### Code:
 
@@ -318,10 +330,6 @@ Credits
 4. [Autoprefixer CSS](https://autoprefixer.github.io/) to optimize the use of vendor extensions in the CSS code.
 5. [Python Programming](https://pythonprogramming.net/decorator-wrappers-flask-tutorial-login-required/) as how to use the Login_Required decorator.
 
-
-### Media 
-
-#### Images
 
 ### Other
 
