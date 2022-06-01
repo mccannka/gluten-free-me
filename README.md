@@ -234,12 +234,75 @@ All elements tested above, in addition to Lighthouse, CSS and Python error check
 - When registering to add a recipe, email address is only accepted, this is then shared across the website if you add a recipe.  Updated to accept username.
 <br>Recipe summary [here](static/img/testing/recipe-summary.png)shows email address displayed for username
 
+- When searching for a recipe, users couldnt easily reset search results 
+
 ### Bugs identified and uncorrected
+
+- Remaining errors within [app.py](static/img/testing/py-file-output.png) file are deemed false positive.  
 
 Deployment
 ======
 
-### Deployment
+### Create Project  
+
+This project was created on Github using the following steps: 
+1. Navigate to [GitHub](https://github.com/) and sign in
+2. On the left hand side above the list of your repositories click on the green button that says "New", this will create a new repository
+3. From the drop down menu that says "Repository templates" I choose the Code Institute Template  
+4. Enter a name for the project and then click on the green button that says "Create Repository"
+
+Before creating the Heroku app you need to add the following files in Gitpod:
+
+ - To create your requirements file, type this in the terminal:
+    - pip3 freeze --local > requirements.txt
+- To create your Procfile, type this in the terminal:
+    - echo web: python run.py > Procfile 
+
+In the Procfile make sure it contains the following line: web: python app.py, and that it is no blank line after it.
+
+### Deployment to Heroku  
+
+This project was deployed through Heroku using the following steps:
+1. Navigate to [Heroku](https://dashboard.heroku.com/login) and sign in
+2. On the top right corner there is a button that says "New". Click this button and choose the option "Create New App"
+3. Choose a name for the App and what region that are closest to your location, click "Create App"
+4. Click on the tab saying "Deploy" and select GitHub, Connect to GitHub
+5. Enter the name of your repository on GitHub and click search
+6. When the repository is found, click the "Connect" button
+7. Click on the tab saying "Settings" and then click on the button saying "Reveal config vars"
+
+8. Add these variables:
+
+    key: IP, value: 0.0.0.0 <br>
+    key: MONGODB_NAME, value: (the name of your database)<br>
+    key: MONGO_URI, value: (unique uri from mongo.db)<br>
+    key: PORT, value: 5000<br>
+    key: SECRET_KEY, value: (unique secret key for configuration)<br>
+
+9. Click on the "Deploy" tab and scroll down to the section "Automatic Deployment"
+10. Choose the branch you want to deploy from and then click "Enable Automatic Deploys"
+
+### How To Run The Code Locally  
+
+To run this project locally you need to create the env.py file using your own variables since these are not provided for security reasons. To have the database connection you'll also need to create your own database collection on MongoDB and connect it to your project.
+
+1. Log in to Github.
+2. Navigate to the [repository](https://github.com/mccannka/gluten-free-me)
+3. Click the tab that says "Code" and from the dropdown menu choose copy Git URL
+4. Open Git and type "git clone" in the terminal followed by the URL you just copied, press enter to create your local clone
+5. To install the packages listed in the requirements file type the following in the terminal: 
+pip install -r requirements.txt
+
+### Fork Project  
+
+To fork the project follow these steps:
+
+1. Log in to Github
+2. Navigate to the [repository](https://github.com/mccannka/gluten-free-me)
+3. Locate the "Fork" button on the top right corner of the page
+4. A duplicate of the original repository is now in your Github account
+
+---
 
 Credits
 ======
