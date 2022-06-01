@@ -1,9 +1,9 @@
 GLUTEN FREE & ME
 ======
+**Milestone Project 3: Backend Development**
+[Click here to view live site](https://gluten-free-and-me.herokuapp.com/) 
 
-**[Code Institute](https://learn.codeinstitute.net/ci_program/diplomainsoftwaredevelopment)  Milestone Project 3: Backend Development**
-
-<img src="static/img/company-logo.png" alt="Logo" width="15%" height="15%"> 
+<img src="static/img/testing/am-i-responsive.png" alt="Example across devices" width="100%" height="15%"> 
 
 GLUTEN FREE & ME is a site for those who suffer from Gluten intolerance, to enable recipe sharing so that those with a gluten tolerance still have a varied diet.  The site's primary goal is to enable sharing of recipes and creation of a community.  When you are logged in, you can add, edit and delete your own recipes.
 This project will embed learnings around HTML, CSS, JavaScript and Python.
@@ -58,15 +58,18 @@ This is a website aimed at visitors who suffer from gluten intolerances and want
 
 ##### Visitor Goals
 
-- To create an account and log in on that account.
-- To create, read, update and delete my own recipes.
-- To be able to see different recipes and search for them using keywords.
+- As a user I want to easily access recipes 
+- As a user I want to search recipes easily 
+- As a user I want to create an account and log in on that account to add my own recipes
+- As a user I want to create, read, update and delete my own recipes
+- As a user I want to be able to see different recipes and search for them using keywords.
 
 
 ##### Site Owners Goals
 
-- Share everyday Gluten free recipes that can be reused within the comminity.
-- To promote that having an intolerance can be supported within everyday life.
+- Share everyday Gluten free recipes that can be reused within the community.
+- Promote that having an intolerance can be supported within everyday life.
+- Signpost external supports that may add value to vistors transitioning to a gluten free diet.
 
 
 ### Strategy
@@ -77,7 +80,7 @@ The design goal is to make a clear, accessible, structured site so that visitors
 
 The site will have:
 - A homepage with a small introduction. 
-- An about page which tells a bit about the creator of the site and why the site was created. Furthermore,
+- An about page which tells a bit about the creator of the site and why the site was created. 
 - A recipes page on which you can you choose to go to a specific recipe. 
 - A register page, a log in page, a personal recipe page and a add recipe page.
 The personal recipe page, add recipe page and the log out option will only be visible when you are logged in.
@@ -100,14 +103,6 @@ Also on the homepage there is a difference in what you will see when you are log
 Register button | &#10060; | &#9989; |
 Log in button  | &#10060; | &#9989; |
 
-A difference has also been made in user rights:
-| Recipe options | Standard User Account | Admin User Account |
- --- | --- | ---
-Add own recipe| &#9989; | &#9989; |
-Edit own recipe | &#9989; | &#9989; |
-Delete own recipe | &#9989; | &#9989; |
-Edit recipes of other users| &#10060; | &#9989; |
-Delete recipes of other users| &#10060; | &#9989; |
 
 ### Structure
 
@@ -115,9 +110,9 @@ The site will be structured as clear as possible, it should be easy to see what 
 
 ### Wireframes
 
-- Desktop wireframe [file](static/img/desktop.png)
-- Mobile wireframe [file](static/img/mobile-app.png)
-- Ipad wireframe [file](static/img/ipad.png)
+- Desktop wireframe [file](static/img/testing/desktop.png)
+- Mobile wireframe [file](static/img/testing/mobile-app.png)
+- Ipad wireframe [file](static/img/testing/ipad.png)
 
 Features
 ======
@@ -153,12 +148,17 @@ Technologies
 
 ### Libraries and Frameworks
 
-- Materialize 1.0.0
+- Flask 
+- Flask-PyMongo 
+- pip
+- dnspython 
+- Materialize
 - jQuery
 - PyMongo
 - Flask
 - Jinja
 - Werkzeug
+- Font Awesome
 
 
 ### Wireframes
@@ -171,6 +171,16 @@ Technologies
 - [MongoDB Atlas](https://www.mongodb.com/): as a database for this project.
 - [Heroku](https://www.heroku.com/): as a host for the deployed site.
 - [GitHub](https://github.com/): for the repository.
+- [Am I Responsive](http://ami.responsivedesign.is/#): used to create the mockup image in the beginning of this README file..
+- [W3C Markp Validation Service](https://validator.w3.org/):  used to check the HTML pages.
+- [PEP8 online](http://pep8online.com/): used to check the app.py file.
+- [Coolors](https://coolors.co/): used to create colour palette.
+- [Tinypng](https://tinypng.com/): used to compress images.
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse): used to improve performance.
+- [JSHint](https://jshint.com/): used to check .js files.
+- [](): .
+
+
 
 Testing and Bugs 
 ======
